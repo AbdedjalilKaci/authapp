@@ -1,12 +1,9 @@
-'use client'
-import React from 'react'
-import welcomside from '@/components/welcom/welcomside'
-const page = () => {
-  return (
-    <div>
-      <welcomside/>
-    </div>
-  )
-}
+import WelcomeSide from "@/components/welcom/welcomside";
 
-export default page
+export default function Home() {
+  return (
+    <div className="">
+      <WelcomeSide title="welcome back" desc="welcome back to our company" button="Sign up"/>
+    </div>
+  );
+}
