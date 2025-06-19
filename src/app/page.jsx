@@ -1,9 +1,10 @@
 import WelcomeSide from "@/components/welcom/welcomside";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="">
-      <WelcomeSide title="welcome back" desc="welcome back to our company" button="Sign up"/>
+      <Link href="/auth/Login">Login</Link>
     </div>
   );
 }
