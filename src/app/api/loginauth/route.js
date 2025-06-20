@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
+import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
+
 export async function POST(req) {
   try {
     const body = await req.json();
     const { email, password } = body;
-    //     const body = await req.json();
-    // const { firstName, lastName, email, password } = body;
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -14,13 +14,20 @@ export async function POST(req) {
         status: 404,
       });
     }
-    // user = await prisma.user.findUnique({
-    //   where: { email },
-    // });
-    return new Response(
-      JSON.stringify({ message: "user founded"}),
-      { status: 201 }
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
     );
+    return new Response(JSON.stringify({ message: "user founded",token }), {
+      status: 201,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.log(error);
     return new Response(JSON.stringify({ message: "server error" }), {

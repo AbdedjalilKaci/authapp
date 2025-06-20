@@ -2,7 +2,9 @@
 import React, { useState } from 'react'
 import WelcomeSide from "@/components/welcom/welcomside";
 import axios from 'axios';
+import { useRouter } from 'next/router';
 const page = () => {
+    // const router = useRouter();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     async function signin(e) {
@@ -14,6 +16,9 @@ const page = () => {
             });
             alert("signin sucsses");
             console.log(response.data);
+            // localStorage.setItem("responsedata",  response.data);
+            localStorage.setItem("responsedata", JSON.stringify(response.data));
+            // router.push("/profile")
         } catch (error) {
             console.log(error);
         }

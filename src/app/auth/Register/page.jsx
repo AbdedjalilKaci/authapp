@@ -7,12 +7,6 @@ const page = () => {
     const [lastname, setLastname] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [form, setForm] = useState({
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-    })
     async function signup(e) {
         e.preventDefault();
         try {
