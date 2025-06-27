@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
-
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 export async function GET(req) {
   const authHeader = req.headers.get("authorization");
 
@@ -10,7 +11,7 @@ export async function GET(req) {
   }
 
   const token = authHeader.split(" ")[1];
-
+   
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
